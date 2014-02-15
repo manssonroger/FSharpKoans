@@ -76,6 +76,6 @@ module ``about the stock example`` =
          
         let olle = Seq.maxBy (fun (date,z)->z)  parsed
         
-        let maxDate maxVar=olle
+        let maxDate = fst olle
        
         AssertEquality "2012-03-13" maxDate
