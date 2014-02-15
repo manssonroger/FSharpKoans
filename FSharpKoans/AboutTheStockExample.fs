@@ -78,4 +78,4 @@ module ``about the stock example`` =
         
         let maxDate maxVar=olle
        
-        AssertEquality "2012-03-13" maxDate.ToString
+        AssertEquality "2012-03-13" maxDate
