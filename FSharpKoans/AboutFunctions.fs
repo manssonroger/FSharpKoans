@@ -24,19 +24,18 @@ module ``about functions`` =
         let result1 = add 2 2
         let result2 = add 5 2
         
-        AssertEquality result1 __
-        AssertEquality result2 __
+        AssertEquality result1 4
+        AssertEquality result2 7
 
     [<Koan>]
     let NestingFunctions() =
         let quadruple x =    
             let double x =
                 x * 2
+            double <| double x 
 
-            double(double(x))
-
-        let result = quadruple 4
-        AssertEquality result __
+        let result = 4|>quadruple
+        AssertEquality result 16
 
     [<Koan>]
     let AddingTypeAnnotations() =
@@ -48,13 +47,13 @@ module ``about functions`` =
             text.Replace(" ", "")
 
         let auctioneered = sayItLikeAnAuctioneer "going once going twice sold to the lady in red"
-        AssertEquality auctioneered __
+        AssertEquality auctioneered "goingoncegoingtwicesoldtotheladyinred"
 
         //TRY IT: What happens if you remove the type annotation on text?
 
     [<Koan>]
     let VariablesInTheParentScopeCanBeAccessed() =
-        let suffix = "!!!"
+        let  suffix = "!!!"
 
         let caffinate (text:string) =
             let exclaimed = text + suffix
@@ -63,7 +62,7 @@ module ``about functions`` =
 
         let caffinatedReply = caffinate "hello there"
 
-        AssertEquality caffinatedReply __
+        AssertEquality caffinatedReply "HELLO THERE!!!"
 
         (* NOTE: Accessing the suffix variable in the nested caffinate function 
                  is known as a closure. 

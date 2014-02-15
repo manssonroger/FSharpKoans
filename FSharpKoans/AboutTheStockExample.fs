@@ -57,6 +57,25 @@ module ``about the stock example`` =
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+
+        let splitCommas (x:string) =
+            x.Split([|','|])
+
+        let parseRow (inData:string[]) =
+            let invariantPrice input = System.Decimal.Parse(input,System.Globalization.CultureInfo.InvariantCulture) 
+            (inData.[ 0] , invariantPrice inData.[1], invariantPrice inData.[4])
+
+        let variance (date, openPrice, closePrice) =
+            (date,abs(openPrice-closePrice))
+       
+        let parsed = 
+            stockData.Tail
+            |>List.map splitCommas 
+            |>List.map parseRow
+            |>List.map variance
+         
+        let olle = Seq.maxBy (fun (date,z)->z)  parsed
         
-        AssertEquality "2012-03-13" result
+        let maxDate maxVar=olle
+       
+        AssertEquality "2012-03-13" maxDate.ToString
